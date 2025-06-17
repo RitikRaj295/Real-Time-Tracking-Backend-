@@ -5,7 +5,7 @@ import { Server } from "socket.io";
 const app=express();
 const server=http.createServer(app);
 const io = new Server(server);
-const port=3000;
+const PORT = process.env.PORT || 3000;
 
 app.set("view engine","ejs");
 app.use(express.static("./Public"))
@@ -27,5 +27,5 @@ app.get("/",(req,res)=>{
     res.render("index");
 })
 
-server.listen(port,()=>{console.log("Server is listening on port no: 3000")});
+server.listen(PORT,()=>{console.log("Server is listening on port no: 3000")});
 

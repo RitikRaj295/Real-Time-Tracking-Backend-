@@ -35,7 +35,6 @@ const marker={};
 
 socket.on("recieve-location",(data)=>{
     const {id,latitude,longitude}=data;
-    // console.log(id,latitude,longitude);
     map.setView([latitude,longitude]);
     L.marker([latitude,longitude]).addTo(map);
 

@@ -13,7 +13,7 @@ app.use(express.static("./Public"))
 io.on("connection",(socket)=>{
     console.log("new user connected")
     socket.on("send-location",(data)=>{
-        io.emit("recieve-location",(data))
+        io.emit("recieve-location",{id: socket.id,...data})
     });
 
     socket.on("disconnect",()=>{

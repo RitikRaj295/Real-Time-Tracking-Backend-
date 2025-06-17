@@ -35,16 +35,19 @@ const marker={};
 
 socket.on("recieve-location",(data)=>{
     const {id,latitude,longitude}=data;
-    console.log(id,latitude,longitude);
+    // console.log(id,latitude,longitude);
     map.setView([latitude,longitude]);
-    L.marker([latitude,longitude]).addTo(map)
-});
+    L.marker([latitude,longitude]).addTo(map);
 
-if(marker[id]){
+    if(marker[id]){
     marker[id].setLatLng([latitude,longitude]);
+    console.log(marker[id]);
 }else{
     marker[id]= L.marker([latitude,longitude]).addTo(map);
 }
+});
+
+
 
 socket.on("user-disconnect",(id)=>{
     if(marker[id]){

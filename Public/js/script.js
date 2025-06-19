@@ -13,8 +13,10 @@ if(navigator.geolocation){
     navigator.geolocation.watchPosition(
         (position)=>{
             const {longitude,latitude}=position.coords;
-            console.log({latitude,longitude});
-            map.setView([latitude, longitude], 16);
+             if (!marker[socket.id]) {
+          map.setView([latitude, longitude], 16);
+        }
+
             socket.emit("send-location",{longitude,latitude})
         },
         (error)=>{
@@ -38,11 +40,9 @@ if(navigator.geolocation){
 
 socket.on("recieve-location",(data)=>{
     const {id,latitude,longitude}=data;
-    map.setView([latitude,longitude]);
 
     if(marker[id]){
     marker[id].setLatLng([latitude,longitude]);
-    console.log(marker[id]);
 }else{
     marker[id]= L.marker([latitude,longitude]).addTo(map);
 }
